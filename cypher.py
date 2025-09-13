@@ -9,7 +9,7 @@ import re
 import os
 from time import sleep
 from os import system, environ, path, getcwd, popen, makedirs
-from subprocess import check_output, CalledProcessError, Popen, PIPE
+from subprocess import check_output, CalledProcessError, Popen, PIPE, STDOUT
 from sys import stdout, argv, exit
 import requests
 from Server import *
@@ -168,8 +168,8 @@ def customLocalxpose(port):
     loclx_command = [loclx_executable, 'tunnel', '--raw-mode', 'http', '--to', f':{port}', '--subdomain', lnk]
     
     link_url_path = "link.url"
-    with open(link_url_path, "w") as f:
-        tunnel_process = Popen(loclx_command, stdout=f, stderr=PIPE)
+    tunnel_log = open(link_url_path, "w")
+    tunnel_process = Popen(loclx_command, stdout=tunnel_log, stderr=STDOUT)
 
     sleep(10)
 
@@ -203,8 +203,8 @@ def randomLocalxpose(port):
     loclx_command = [loclx_executable, 'tunnel', '--raw-mode', 'http', '--to', f':{port}']
     
     link_url_path = "link.url"
-    with open(link_url_path, "w") as f:
-        tunnel_process = Popen(loclx_command, stdout=f, stderr=PIPE)
+    tunnel_log = open(link_url_path, "w")
+    tunnel_process = Popen(loclx_command, stdout=tunnel_log, stderr=STDOUT)
 
     sleep(10)
     

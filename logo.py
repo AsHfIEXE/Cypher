@@ -57,8 +57,8 @@ def android_banner():
                                                {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
                                                  {YELLOW}BY: {RED}AsHfIEXE {RED}<Cypher>{DEFAULT} 
                                                {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
-           {GREEN2}GitHub Profile{y}{RED} : {DEFAULT}{YELLOW}https://github.com/AsHfIEXE{DEFAULT}               
-       {GREEN2}LinkedIn Profile{y}{RED} : {DEFAULT}{YELLOW}https://www.linkedin.com/in/salehinashfi{DEFAULT}
+           {GREEN2}GitHub Profile{y}{RED} : {DEFAULT}{YELLOW}{{https://github.com/AsHfIEXE{DEFAULT}               
+       {GREEN2}LinkedIn Profile{y}{RED} : {DEFAULT}{YELLOW}{{https://www.linkedin.com/in/salehinashfi{DEFAULT}
   
 '''.format(RED=RED, BRED=BRED, CYAN=CYAN, GREEN=GREEN, DEFAULT=DEFAULT ,YELLOW=YELLOW, BLINK=BLINK, GREEN2=GREEN2, YELLOW2=YELLOW2, lred=lred, lyellow=lyellow, Magenta=Magenta, y=y, lblue=lblue))
 
@@ -78,8 +78,8 @@ def sbanner():
                                                {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
                                                  {YELLOW}BY: {RED}AsHfIEXE {RED}<Cypher>{DEFAULT} 
                                                {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
-           {GREEN2}GitHub Profile{y}{RED} : {DEFAULT}{YELLOW}https://github.com/AsHfIEXE{DEFAULT}               
-       {GREEN2}LinkedIn Profile{y}{RED} : {DEFAULT}{YELLOW}https://www.linkedin.com/in/salehinashfi{DEFAULT}
+           {GREEN2}GitHub Profile{y}{RED} : {DEFAULT}{YELLOW}{{https://github.com/AsHfIEXE{DEFAULT}               
+       {GREEN2}LinkedIn Profile{y}{RED} : {DEFAULT}{YELLOW}{{https://www.linkedin.com/in/salehinashfi{DEFAULT}
   
 '''.format(RED=RED, WHITE=WHITE, CYAN=CYAN, GREEN=GREEN, DEFAULT=DEFAULT ,YELLOW=YELLOW, blink=blink, GREEN2=GREEN2, YELLOW2=YELLOW2, lred=lred, lyellow=lyellow, Magenta=Magenta, BRED=BRED, y=y, lblue=lblue))
 
