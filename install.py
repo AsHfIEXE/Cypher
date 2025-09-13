@@ -13,10 +13,15 @@ def loading_bar(iteration, total, prefix='', length=40):
     sys.stdout.flush()
 
 # Execute shell command with error handling
-def execute_command(command, description):
+def execute_command(command, description, wait=True):
     try:
         print(f"\n{description}...")
-        # Using a simple spinner for commands as progress bar is not always applicable
+        
+        if not wait:
+            # For launching interactive scripts, don't pipe stdout/stderr
+            subprocess.run(command, shell=True, check=True)
+            return
+
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         spinner = "|/-\\"
         idx = 0
@@ -84,6 +89,13 @@ def main():
 
     check_and_install_dependencies(dependencies)
 
+    # If the script is already running inside the 'Cypher' directory, don't re-clone.
+    if os.path.basename(os.getcwd()).lower() == 'cypher':
+        print("\nAlready inside the Cypher directory. Skipping setup.")
+        print("\nLaunching Cypher...")
+        execute_command("python3 cypher.py", "Running cypher.py", wait=False)
+        return
+
     # Ask user for the installation directory
     try:
         import tkinter as tk
@@ -131,7 +143,8 @@ def main():
     if os.path.isdir(cypher_dir):
         os.chdir(cypher_dir)
         print("\nLaunching Cypher...")
-        execute_command("python3 cypher.py", "Running cypher.py")
+        # Launch cypher.py without waiting for it to finish, allowing it to run interactively
+        execute_command("python3 cypher.py", "Running cypher.py", wait=False)
     else:
         print("Error: Cypher directory not found after cloning.")
 

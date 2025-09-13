@@ -32,11 +32,11 @@ def banner():
   ╚██████╗   ██║   ██║     ██║  ██║███████╗██║  ██║
    ╚═════╝   ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
 
-                                                                 {13}•·.·''·.·•·.·''·.·•{4}
-                                                                   {5}BY: {0}AsHfIEXE {0}<Cypher>{4}     
-                                                                 {13}•·.·''·.·•·.·''·.·•{4}
-                         {7}GitHub Profile{6}{0} : {4}{5}https://github.com/AsHfIEXE{4} 
-                      {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/salehinashfi{4}
+                                                                 {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
+                                                                   {YELLOW}BY: {RED}AsHfIEXE {RED}<Cypher>{DEFAULT}     
+                                                                 {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
+                         {GREEN2}GitHub Profile{y}{RED} : {DEFAULT}{YELLOW}{https://github.com/AsHfIEXE{DEFAULT} 
+                      {GREEN2}LinkedIn Profile{y}{RED} : {DEFAULT}{YELLOW}{https://www.linkedin.com/in/salehinashfi{DEFAULT}
            
            
     '''.format(RED=RED, BRED=BRED, CYAN=CYAN, GREEN=GREEN, DEFAULT=DEFAULT ,YELLOW=YELLOW, Magenta=Magenta,y=y, lred=lred, lyellow=lyellow, BLINK=BLINK, GREEN2=GREEN2, YELLOW2=YELLOW2, lblue=lblue))
@@ -54,11 +54,11 @@ def android_banner():
   ╚██████╗   ██║   ██║     ██║  ██║███████╗██║  ██║
    ╚═════╝   ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
 
-                                               {13}•·.·''·.·•·.·''·.·•{4}
-                                                 {5}BY: {0}AsHfIEXE {0}<Cypher>{4} 
-                                               {13}•·.·''·.·•·.·''·.·•{4}
-           {7}GitHub Profile{6}{0} : {4}{5}https://github.com/AsHfIEXE{4}               
-       {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/salehinashfi{4}
+                                               {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
+                                                 {YELLOW}BY: {RED}AsHfIEXE {RED}<Cypher>{DEFAULT} 
+                                               {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
+           {GREEN2}GitHub Profile{y}{RED} : {DEFAULT}{YELLOW}https://github.com/AsHfIEXE{DEFAULT}               
+       {GREEN2}LinkedIn Profile{y}{RED} : {DEFAULT}{YELLOW}https://www.linkedin.com/in/salehinashfi{DEFAULT}
   
 '''.format(RED=RED, BRED=BRED, CYAN=CYAN, GREEN=GREEN, DEFAULT=DEFAULT ,YELLOW=YELLOW, BLINK=BLINK, GREEN2=GREEN2, YELLOW2=YELLOW2, lred=lred, lyellow=lyellow, Magenta=Magenta, y=y, lblue=lblue))
 
@@ -75,11 +75,11 @@ def sbanner():
   ╚██████╗   ██║   ██║     ██║  ██║███████╗██║  ██║
    ╚═════╝   ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
 
-                                               {13}•·.·''·.·•·.·''·.·•{4}
-                                                 {5}BY: {0}AsHfIEXE {0}<Cypher>{4} 
-                                               {13}•·.·''·.·•·.·''·.·•{4}
-           {7}GitHub Profile{6}{0} : {4}{5}https://github.com/AsHfIEXE{4}               
-       {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/salehinashfi{4}
+                                               {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
+                                                 {YELLOW}BY: {RED}AsHfIEXE {RED}<Cypher>{DEFAULT} 
+                                               {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
+           {GREEN2}GitHub Profile{y}{RED} : {DEFAULT}{YELLOW}https://github.com/AsHfIEXE{DEFAULT}               
+       {GREEN2}LinkedIn Profile{y}{RED} : {DEFAULT}{YELLOW}https://www.linkedin.com/in/salehinashfi{DEFAULT}
   
 '''.format(RED=RED, WHITE=WHITE, CYAN=CYAN, GREEN=GREEN, DEFAULT=DEFAULT ,YELLOW=YELLOW, blink=blink, GREEN2=GREEN2, YELLOW2=YELLOW2, lred=lred, lyellow=lyellow, Magenta=Magenta, BRED=BRED, y=y, lblue=lblue))
 
