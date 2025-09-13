@@ -472,6 +472,7 @@ def check_for_updates():
         sleep(2)
 
 clear_screen()
+check_requirements()
 check_for_updates()
 # menu_q()
 global kill
@@ -485,9 +486,9 @@ else:
     kill = '2'
 sleep(2)
 # checkjp2a() # jp2a is not cross-platform
-# checkPHP()
-# checkNgrok()
-# checkLocalxpose()
+checkPHP()
+checkNgrok()
+checkLocalxpose()
 fresh()
 getpath()
 port=selectPort()

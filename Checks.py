@@ -2,6 +2,7 @@ import subprocess
 import ctypes
 import requests 
 import urllib
+import pkg_resources
 #from urllib import urlopen
 from os import system, getuid, path
 from time import sleep
@@ -9,6 +10,36 @@ from platform import system as systemos, architecture
 from subprocess import check_output
 import sys, os, time, random, threading
 RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW, YELLOW2, GREEN2= '\033[91m', '\033[46m', '\033[36m', '\033[1;32m', '\033[0m' , '\033[1;33m' , '\033[1;93m', '\033[1;92m'
+
+def check_requirements():
+    """Checks if all packages from requirements.txt are installed, and installs them if not."""
+    print("{0}[{2}#{0}] {2}Checking Python packages...".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
+    try:
+        with open('requirements.txt', 'r') as f:
+            requirements = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+        
+        missing_packages = []
+        for package in requirements:
+            try:
+                pkg_resources.get_distribution(package.split('==')[0])
+            except pkg_resources.DistributionNotFound:
+                missing_packages.append(package)
+
+        if not missing_packages:
+            print("{0}[{2}#{0}] {3}All Python packages are installed.".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
+            sleep(1)
+        else:
+            print("{0}[{2}#{0}] {2}Missing packages: {YELLOW}{1}{2}. Installing...".format(RED, ', '.join(missing_packages), CYAN, GREEN, DEFAULT, YELLOW))
+            for package in missing_packages:
+                system(f"pip install {package}")
+
+    except FileNotFoundError:
+        print("{0}[{2}#{0}] {YELLOW}requirements.txt not found. Skipping package check.".format(RED, WHITE, CYAN, GREEN, DEFAULT, YELLOW))
+        sleep(2)
+    except Exception as e:
+        print(f"{RED}[!] An error occurred while checking/installing packages: {e}")
+        sleep(2)
+
 def net():
     system('clear')
     print("{0}[{2}#{0}] {2}Checking for internet connection{2}....".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW ))
@@ -31,15 +62,17 @@ def verCheck():
             local_version = f.read().split('\n')
         if local_version[0].strip() == response.strip():
             print("{0}[{2}#{0}] {2}[Up-To-Date]- {0}v {6}{4}".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW, response.strip()))
-            system('git fetch --quiet; git reset --hard origin/master --quiet; git pull --quiet')
         else:
             print("\n{0}[{2}#{0}] {2}Their Is A Newer Version Available.".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
             print("{0}[{2}#{0}] {0}[{2}Current{0}]{2}- {0}v {6}\n{0}[{2}#{0}] {0}[{2}Available{0}]{2}- {0}v.{7}".format(RED, WHITE, CYAN, GREEN, DEFAULT, YELLOW, local_version[0], response.strip())) 
-            print("{0}[{2}#{0}] {2}Updating To The Latest Version {0}[{2}v {6}{0}] \n{0}[{2}#{0}] {2}Please Wait....{7}\n".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW, response.strip() ,GREEN2))
-            system('git fetch --quiet; git reset --hard origin/master --quiet; git pull --quiet')
-            print("\n\n\n\t\t{2}[{0}#{2}] {0}Restart program \n {2}Enter this command to run {0}-> {3}python3 cypher.py".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
-            exit()
-    except:
+            update_choice = input("{0}[{2}#{0}] {2}Do you want to update now? (y/n): ".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW)).lower()
+            if update_choice == 'y':
+                print("{0}[{2}#{0}] {2}Updating To The Latest Version {0}[{2}v {6}{0}] \n{0}[{2}#{0}] {2}Please Wait....{7}\n".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW, response.strip() ,GREEN2))
+                system('git fetch --quiet; git reset --hard origin/master --quiet; git pull --quiet')
+                print("\n\n\n\t\t{2}[{0}#{2}] {0}Restart program \n {2}Enter this command to run {0}-> {3}python3 cypher.py".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
+                exit()
+    except Exception as e:
+        print(f"{RED}[!] Could not check for updates: {e}")
         pass
 
 def checkjp2a():
