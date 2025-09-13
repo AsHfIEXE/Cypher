@@ -119,45 +119,55 @@ def checkNgrok():
         filename = None
         if 'linux' in ostype:
             if 'aarch64' in machine or 'arm' in machine:
-                filename = 'ngrok-stable-linux-arm.zip'
+                filename = 'ngrok-v3-stable-linux-arm.tgz'
             elif '64' in arch:
-                filename = 'ngrok-stable-linux-amd64.zip'
+                filename = 'ngrok-v3-stable-linux-amd64.tgz'
             else:
-                filename = 'ngrok-stable-linux-386.zip'
+                filename = 'ngrok-v3-stable-linux-386.tgz'
         elif 'darwin' in ostype:
-            filename = 'ngrok-stable-darwin-amd64.zip'
+            if 'arm64' in machine: # For Apple Silicon
+                 filename = 'ngrok-v3-stable-darwin-arm64.zip'
+            else: # Assuming amd64 for other Macs
+                filename = 'ngrok-v3-stable-darwin-amd64.zip'
         elif 'windows' in ostype:
             if '64' in arch:
-                filename = 'ngrok-stable-windows-amd64.zip'
+                filename = 'ngrok-v3-stable-windows-amd64.zip'
             else:
-                filename = 'ngrok-stable-windows-386.zip'
+                filename = 'ngrok-v3-stable-windows-386.zip'
         
         if not filename:
             print(f"{RED}[!] Unsupported OS/Architecture for Ngrok: {ostype}/{arch}/{machine}")
             exit()
 
-        url = 'https://bin.equinox.io/c/bNyj1mQVY4c/' + filename
+        url = 'https://ngrok-agent.s3.amazonaws.com/' + filename
         
         try:
             print(f'{GREEN}[*] Downloading {filename}...{DEFAULT}')
             response = requests.get(url, stream=True)
             response.raise_for_status()
 
-            with open(filename, "wb") as file_obj:
+            download_path = os.path.join(os.getcwd(), filename)
+            with open(download_path, "wb") as file_obj:
                 for chunk in response.iter_content(chunk_size=8192):
                     file_obj.write(chunk)
             
-            with zipfile.ZipFile(filename, 'r') as zip_ref:
-                zip_ref.extractall('.')
+            extract_dir = os.getcwd()
+            if filename.endswith('.zip'):
+                with zipfile.ZipFile(download_path, 'r') as zip_ref:
+                    zip_ref.extractall(extract_dir)
+            elif filename.endswith('.tgz'):
+                with tarfile.open(download_path, 'r:gz') as tar_ref:
+                    tar_ref.extractall(extract_dir)
             
-            executable = 'ngrok.exe' if 'windows' in ostype else 'ngrok'
-            
-            if not os.path.exists(executable):
-                print(f"{RED}[!] Could not find '{executable}' after extraction.")
+            executable_name = 'ngrok.exe' if 'windows' in ostype else 'ngrok'
+            extracted_executable_path = os.path.join(extract_dir, executable_name)
+
+            if not os.path.exists(extracted_executable_path):
+                print(f"{RED}[!] Could not find '{executable_name}' after extraction.")
                 exit()
 
-            shutil.move(executable, ngrok_path)
-            os.remove(filename)
+            shutil.move(extracted_executable_path, ngrok_path)
+            os.remove(download_path)
             
             if not 'windows' in ostype:
                 os.chmod(ngrok_path, 0o755)
