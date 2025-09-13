@@ -332,6 +332,22 @@ def selectServer(port):
         clear_screen()
         return selectServer(port)
 
+def localhost(port):
+    """Start a local PHP server for testing."""
+    global king
+    clear_screen()
+    sbanner()
+    print("\n\n{5}-------------------------------\n{0} [ {2}LOCALHOST SERVER{0}] \n{5}-------------------------------{4}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
+    print("\n\t {0}Your localhost server is running on:{2} http://127.0.0.1:{3}".format(RED, WHITE, CYAN, port, DEFAULT ,YELLOW))
+    print("\n\t {0}Keep this window running to maintain the server.{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
+    
+    start_php_server(port)
+    try:
+        while True:
+            sleep(2)  # Keep the script running
+    except KeyboardInterrupt:
+        print("\n\n{0}[{2}!{0}]{2} Server stopped.".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
+
 def getpath():
     """Writes the absolute path to the CapturedData directory into path.txt."""
     cwd = getcwd()

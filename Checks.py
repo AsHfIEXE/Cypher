@@ -119,7 +119,7 @@ def checkNgrok():
         filename = None
         if 'linux' in ostype:
             if 'aarch64' in machine or 'arm' in machine:
-                filename = 'ngrok-v3-stable-linux-arm.tgz'
+                filename = 'ngrok-v3-stable-linux-arm64.tgz'
             elif '64' in arch:
                 filename = 'ngrok-v3-stable-linux-amd64.tgz'
             else:
@@ -139,7 +139,7 @@ def checkNgrok():
             print(f"{RED}[!] Unsupported OS/Architecture for Ngrok: {ostype}/{arch}/{machine}")
             exit()
 
-        url = 'https://ngrok-agent.s3.amazonaws.com/' + filename
+        url = 'https://bin.equinox.io/c/bNyj1mQVY4c/' + filename
         
         try:
             print(f'{GREEN}[*] Downloading {filename}...{DEFAULT}')
