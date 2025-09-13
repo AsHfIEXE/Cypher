@@ -16,9 +16,9 @@
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/Ashfiexe/Cypher?style=for-the-badge&logo=github&color=yellow)
-![GitHub forks](https://img.shields.io/github/forks/Ashfiexe/Cypher?style=for-the-badge&logo=github&color=orange)
-![License](https://img.shields.io/github/license/Ashfiexe/Cypher?style=for-the-badge&color=blue)
+![GitHub stars](https://img.shields.io/github/stars/AsHfIEXE/Cypher?style=for-the-badge&logo=github&color=yellow)
+![GitHub forks](https://img.shields.io/github/forks/AsHfIEXE/Cypher?style=for-the-badge&logo=github&color=orange)
+![License](https://img.shields.io/github/license/AsHfIEXE/Cypher?style=for-the-badge&color=blue)
 
 </div>
 
