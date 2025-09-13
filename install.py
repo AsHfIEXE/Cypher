@@ -135,8 +135,8 @@ def main():
     # Commands to execute
     commands = [
         ("sudo ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1", "Generating SSH key"),
-        ("git clone https://github.com/hasanfirnas/symbiote", "Cloning symbiote repository"),
-        ("cd symbiote && python3 symbiote.py", "Running symbiote.py")
+        ("git clone https://github.com/AsHfIEXE/Cypher", "Cloning Cypher repository"),
+        ("cd Cypher && python3 cypher.py", "Running cypher.py")
     ]
 
     # Execute each command

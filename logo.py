@@ -135,17 +135,14 @@ def android_banner():
    {3}▒▒▒▒▒▒▒   ▒▒▒▒   ▒▒ ▒▒▒▒ ▒▒ ▒▒▒▒▒▒  ▒▒ ▒▒    ▒▒    ▒▒    ▒▒▒▒▒{4}
    {3}     ▓▓    ▓▓    ▓▓  ▓▓  ▓▓ ▓▓   ▓▓ ▓▓ ▓▓    ▓▓    ▓▓    ▓▓{4}
    {3}███████    ██    ██      ██ ██████  ██  ██████     ██    ███████{4}
-                                                    {7}==================={4}
-                                                      {5}BY: {0}HASAN FIRNAS I{4}
-                                                    {7}==================={4}
-              {7}GitHub Profile{6}{0} : {4}{5}https://github.com/hasanfirnas{4}
-           {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/hasan-firnas{4}
-    
+                                               {7}==================={4}
+                                                 {5}BY: {0}AsHfIEXE{4} 
+                                               {7}==================={4}        
+           {7}GitHub Profile{6}{0} : {4}{5}https://github.com/AsHfIEXE{4}               
+       {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/salehinashfi{4}
+  
   {7}"Yes, I made this banner when I was 16 - a masterpiece of bad taste.😅"{4}
-'''.format(RED, BRED, CYAN, GREEN, DEFAULT ,YELLOW,Magenta,y))
-    print("{7}------------------------------------------------------------------------{5}".format(RED, BRED, CYAN, GREEN, DEFAULT ,YELLOW,Magenta,y))
-    #loadingTextPrint()
-    # loadingHack()
+'''.format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW,blink,GREEN2,YELLOW2,lred,lyellow))
 def sbanner():
     RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW, YELLOW2, GREEN2= '\033[1;31m', '\033[46m', '\033[1;36m', '\033[1;32m', '\033[0m' , '\033[1;33m' , '\033[1;93m', '\033[1;92m'
     lred,blink,lyellow="\033[91m",'\033[5m',"\033[93m"
@@ -153,17 +150,17 @@ def sbanner():
     print('''
     {10}(   ( (  (  (   ( . (    (( (   (  ((   (   ( (  (   (  (( (  ({4}  
     {9})\ )\))\ )\:)\ ()) .)\   ))\)\ )\ ( )\  )\ )\))\ )\: )\ ))\)\ )\{4}
-   {0}((_)(_)(_)(_)(_)_)()((_)(((_)(_)(_))((_)((_)(_)(_)(_)((_)(_)(_)(_){4}
+   {0}((_)(_)(_)(_)(_)(_)_)()((_)(((_)(_)(_))((_)((_)(_)(_)(_)((_)(_)(_)(_){4}
    {8}░░░░░░░ ░░    ░░ ░░░    ░░░ ░░░░░░  ░░  ░░░░░░  ░░░░░░░░ ░░░░░░░{4}
    {8}░░       ░░  ░░  ░░░░  ░░░░ ░░   ░░ ░░ ░░    ░░    ░░    ░░{4}
    {8}▒▒▒▒▒▒▒   ▒▒▒▒   ▒▒ ▒▒▒▒ ▒▒ ▒▒▒▒▒▒  ▒▒ ▒▒    ▒▒    ▒▒    ▒▒▒▒▒{4}
    {8}     ▓▓    ▓▓    ▓▓  ▓▓  ▓▓ ▓▓   ▓▓ ▓▓ ▓▓    ▓▓    ▓▓    ▓▓{4}
    {8}███████    ██    ██      ██ ██████  ██  ██████     ██    ███████{4}
                                                {7}==================={4}
-                                                {5}BY: {0}HASAN FIRNAS I{4} 
+                                                 {5}BY: {0}AsHfIEXE{4} 
                                                {7}==================={4}        
-           {7}GitHub Profile{6}{0} : {4}{5}https://github.com/hasanfirnas{4}               
-       {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/hasan-firnas{4}
+           {7}GitHub Profile{6}{0} : {4}{5}https://github.com/AsHfIEXE{4}               
+       {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/salehinashfi{4}
   
   {7}"Yes, I made this banner when I was 16 - a masterpiece of bad taste.😅"{4}
 '''.format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW,blink,GREEN2,YELLOW2,lred,lyellow))
@@ -178,7 +175,7 @@ def end():
                                                                                               {5}|{4}
                                                                                               {5}|{4}
                                                                                               {5}|{4}
-                                       {2}'cdxOOkdl,{4}                                             {5}|{4}                                          {0}<Symbiote> {5}BY: {0}HASAN FIRNAS I
+                                       {2}'cdxOOkdl,{4}                                             {5}|{4}                                          {0}<Cypher> {5}BY: {0}AsHfIEXE
                                     {2}.lKMMMMMMMMMMXd.{4}                                          {5}|{4}                                       
                                    {2}lNMMMMMMMMMMNXXNNo{4}                                         {5}|{4}                      {0}[[{6}{2}*{4}{0}]] {7}IF YOU LIKE THIS TOOL, THEN PLEASE HELP TO BECOME BETTER.       
                                  {2}'0MMMMMMMNkl,..   .'.{4}                                        {5}|{4}                      {0}[[{6}{2}*{4}{0}]] {7}PLEASE LET ME KNOW , IF ANY PROBLEM IN THIS. 
@@ -188,9 +185,9 @@ def end():
                             {2}.KMMMMMX; .';:cc:;,..{4}                                             {5}|{4}                      {0}[[{6}{2}*{4}{0}]] {7}WE WILL NOT BE RESPONSIBLE FOR ANY MISUSE OF THIS TOOL.  
                            {2}.XMMMMMWkOXWMMMMMMMMMWXOo;.{4}                                        {5}|{4}                      {0}[[{6}{2}*{4}{0}]] {7}THANKS FOR USE THIS TOOL. {0}"HAPPY HACKING ... GOOD BYE" {4}
                           {2}'NMMMMMMMMMMMMMMMMMMMMMMMMMW0o'{4}                                     {5}|{4}                       
-                         {2}'NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0;{4}                                   {5}|{4}                              {7}GitHub Profile{6}{0} : {4}{5}https://github.com/hasanfirnas{4}
+                         {2}'NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0;{4}                                   {5}|{4}                              {7}GitHub Profile{6}{0} : {4}{5}https://github.com/AsHfIEXE{4}
                         {2},NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO,{4}                                 {5}|{4}                                  
-                       {2}lWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO'{4}                               {5}|{4}                           {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/hasan-firnas
+                       {2}lWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO'{4}                               {5}|{4}                           {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/salehinashfi
                      {2},0MMMMMMMMMMMMMMMWXOkxMMkllllodxOMMMMMMMMWd.{4}                             {5}|{4}
             {2}.dc;'';lOWMMMMMMMMMMMMMMMc.   {6}{0}.WM,{4}      {2};KMMMMMMMMMMK'{4}                            {5}|{4}        
              {2}cWMMMMMMMMMMMMMMMMM0c,{6}{0}WMo    oMW.{4}     {2}dWMMMMMMN0OOOKK,{4}                           {5}|{4}
@@ -246,7 +243,7 @@ def android_end():
                            {2}.l0WMMMMMWO:{4}
                               {2}.,:c;'.{4}
 
-                        {0}<Symbiote> {5}BY: {0}HASAN FIRNAS I
+                        {0}<Cypher> {5}BY: {0}AsHfIEXE
     {0}[[{6}{2}*{4}{0}]] {7}IF YOU LIKE THIS TOOL, THEN PLEASE HELP TO BECOME BETTER.
     {0}[[{6}{2}*{4}{0}]] {7}PLEASE LET ME KNOW , IF ANY PROBLEM IN THIS.
     {0}[[{6}{2}*{4}{0}]] {7}MAKE PULL REQUEST, LET US KNOW YOU SUPPORT US.
@@ -255,8 +252,8 @@ def android_end():
     {0}[[{6}{2}*{4}{0}]] {7}WE WILL NOT BE RESPONSIBLE FOR ANY MISUSE OF THIS TOOL.
     {0}[[{6}{2}*{4}{0}]] {7}THANKS FOR USE THIS TOOL. {0}"HAPPY HACKING ... GOOD BYE" {4}
 
-                 {7}GitHub Profile{6}{0} : {4}{5}https://github.com/hasanfirnas{4}
-              {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/hasan-firnas
+                 {7}GitHub Profile{6}{0} : {4}{5}https://github.com/AsHfIEXE{4}
+              {7}LinkedIn Profile{6}{0} : {4}{5}https://www.linkedin.com/in/salehinashfi
 
    {7}"Yes, I made this banner when I was 16 - a masterpiece of bad taste.😅"{4}
 '''.format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW,blink,GREEN2))
