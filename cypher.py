@@ -265,19 +265,42 @@ def selectServer(port):
     global kill
     clear_screen()
     sbanner()
+    
+    ngrok_ok = checkNgrok()
+
     print("\n\n{5}----------------------------------\n{0}[{2} Select Any Available Server:{0}] \n{5}----------------------------------".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
     print("\n{0}[{2}*{0}]{2}Select Any Available Server:".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
-    print("\n {0}[{2}1{0}]{2}Ngrok\n {0}[{2}2{0}]{2}localhost.run {5}\n {0}[{2}3{0}]{2}Localxpose".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
+    
+    server_options = []
+    if ngrok_ok:
+        server_options.append("Ngrok")
+    server_options.extend(["localhost.run", "Localxpose", "localhost"])
+
+    for i, option in enumerate(server_options, 1):
+        print(f" {0}[{2}{i}{0}]{2}{option}".format(RED, WHITE, CYAN))
+
     choice = input("\n{0}<Cypher> {5}---->{2}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
-    if choice == '1':
+    
+    selected_server = ""
+    try:
+        choice_index = int(choice) - 1
+        if 0 <= choice_index < len(server_options):
+            selected_server = server_options[choice_index]
+        else:
+            raise ValueError
+    except (ValueError, IndexError):
+        clear_screen()
+        return selectServer(port)
+
+    if selected_server == "Ngrok":
         clear_screen()
         king=1
         runNgrok(port)
-    elif choice == '2':
+    elif selected_server == "localhost.run":
         clear_screen()
         king=2
         randomServeo(port)
-    elif choice == '3':
+    elif selected_server == "Localxpose":
         clear_screen()
         sbanner()
         print("\n\n{5}----------------------------------\n{0}[{2} LOCALXPOSE URL TYPE SELECTION !!{0}] \n{5}----------------------------------{4}\n".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
@@ -294,6 +317,9 @@ def selectServer(port):
         else:
             clear_screen()
             return selectServer(port)
+    elif selected_server == "localhost":
+        king=5
+        localhost(port)
     else:
         clear_screen()
         return selectServer(port)
@@ -494,3 +520,12 @@ getpath()
 port=selectPort()
 option()
 selectServer(port)
+
+def localhost(port):
+    """Starts a simple server and prints the localhost URL."""
+    start_php_server(port)
+    clear_screen()
+    sbanner()
+    print(f"\n\n{YELLOW}---------------------------\n{RED}[{CYAN} LOCALHOST URL !! {RED}]{YELLOW} \n---------------------------".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
+    print(f"\n{RED}[{CYAN}*{RED}]{CYAN} Your server is running on:\n{RED}[{CYAN}*{RED}]{CYAN} http://127.0.0.1:{port}".format(RED, WHITE, CYAN, port=port))
+    report(f"http://127.0.0.1:{port}", port)

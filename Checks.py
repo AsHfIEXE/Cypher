@@ -178,10 +178,11 @@ def checkNgrok():
         except Exception as e:
             print(f"{RED}[!] Error downloading or setting up ngrok: {e}")
             print(f"{YELLOW}[!] Please try downloading ngrok manually from https://ngrok.com/download and place it in the 'Server' directory.")
-            exit()
+            return False
     else:
         print(" {0}[{2}*{0}] {2}NGROK INSTALLATION FOUND......".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
         sleep(1)
+        return True
 
 def checkLocalxpose():
     loclx_path = os.path.join('Server', 'loclx.exe' if systemos() == "Windows" else 'loclx')
