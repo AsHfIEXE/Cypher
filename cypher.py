@@ -38,6 +38,8 @@ else:
     RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW, YELLOW2, GREEN2= '\033[1;91m', '\033[46m', '\033[1;36m', '\033[1;32m', '\033[0m' , '\033[1;33m' , '\033[1;93m', '\033[1;92m'
     blink='\033[5m'
 
+SCRIPT_DIR = path.dirname(path.abspath(__file__))
+
 # Global process variables
 php_process = None
 tunnel_process = None
@@ -136,7 +138,7 @@ def runNgrok(port):
     
     start_php_server(port)
     
-    ngrok_executable = path.join('Server', 'ngrok.exe' if is_windows else 'ngrok')
+    ngrok_executable = path.join(SCRIPT_DIR, 'Server', 'ngrok.exe' if is_windows else 'ngrok')
     ngrok_command = [ngrok_executable, 'http', port]
     tunnel_process = Popen(ngrok_command, stdout=PIPE, stderr=PIPE)
     
@@ -164,7 +166,7 @@ def customLocalxpose(port):
     
     start_php_server(port)
 
-    loclx_executable = path.join('Server', 'loclx.exe' if is_windows else 'loclx')
+    loclx_executable = path.join(SCRIPT_DIR, 'Server', 'loclx.exe' if is_windows else 'loclx')
     loclx_command = [loclx_executable, 'tunnel', '--raw-mode', 'http', '--to', f':{port}', '--subdomain', lnk]
     
     link_url_path = "link.url"
@@ -199,7 +201,7 @@ def randomLocalxpose(port):
     
     start_php_server(port)
 
-    loclx_executable = path.join('Server', 'loclx.exe' if is_windows else 'loclx')
+    loclx_executable = path.join(SCRIPT_DIR, 'Server', 'loclx.exe' if is_windows else 'loclx')
     loclx_command = [loclx_executable, 'tunnel', '--raw-mode', 'http', '--to', f':{port}']
     
     link_url_path = "link.url"
@@ -236,11 +238,11 @@ def randomServeo(port):
     if is_windows:
         print(f"{YELLOW}[!] ssh is not available on Windows by default. This option may not work.")
 
-    ssh_command = ['ssh', '-R', f'80:localhost:{port}', 'ssh.localhost.run']
+    ssh_command = ['ssh', '-o', 'StrictHostKeyChecking=no', '-R', f'80:localhost:{port}', 'ssh.localhost.run']
     
     link_url_path = "link.url"
-    with open(link_url_path, "w") as f:
-        tunnel_process = Popen(ssh_command, stdout=f, stderr=PIPE)
+    tunnel_log = open(link_url_path, "w")
+    tunnel_process = Popen(ssh_command, stdout=tunnel_log, stderr=STDOUT)
 
     sleep(10)
     
