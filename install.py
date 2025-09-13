@@ -2,7 +2,7 @@ import os
 import subprocess
 import sys
 import time
-import importlib.util
+import shutil
 
 # Loading bar for progress visualization
 def loading_bar(iteration, total, prefix='', length=40):
@@ -16,136 +16,124 @@ def loading_bar(iteration, total, prefix='', length=40):
 def execute_command(command, description):
     try:
         print(f"\n{description}...")
-        total_steps = 1
-        for i in range(total_steps):
-            loading_bar(i + 1, total_steps, description)
-            subprocess.run(command, shell=True, check=True)
-            time.sleep(1)  # Simulate processing time
-        loading_bar(total_steps, total_steps, description)
-        print("\nDone.")
-    except subprocess.CalledProcessError as e:
-        print(f"\nError occurred during {description}: {e}")
+        # Using a simple spinner for commands as progress bar is not always applicable
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        spinner = "|/-\\"
+        idx = 0
+        while process.poll() is None:
+            sys.stdout.write(f'\r{description} {spinner[idx % len(spinner)]}')
+            sys.stdout.flush()
+            time.sleep(0.1)
+            idx += 1
+        
+        stdout, stderr = process.communicate()
 
-# Uninstall the dependencies
-def uninstall_dependencies(dependencies):
-    print("Removing existing packages...")
-    for dep in dependencies:
-        execute_command(f"sudo apt remove --purge -y {dep}", f"Removing {dep}")
+        if process.returncode == 0:
+            sys.stdout.write(f'\r{description} Done.      \n')
+            sys.stdout.flush()
+        else:
+            sys.stdout.write(f'\r{description} Failed.    \n')
+            sys.stdout.flush()
+            print(f"Error: {stderr.decode().strip()}")
 
-# Check if a dependency is installed
-def is_installed(dependency):
-    return importlib.util.find_spec(dependency) is not None
+    except Exception as e:
+        print(f"\nAn unexpected error occurred during {description}: {e}")
 
-# Install a dependency with error handling and verification
-def install_dependency_with_prompt(dependency, message):
-    proceed = input(f"\n{message} Do you want to proceed with installing {dependency}? (y/n): ")
+# Check if a command is available
+def is_command_available(command):
+    """Check if a command is in the system's PATH."""
+    return shutil.which(command) is not None
+
+# Check and install dependencies
+def check_and_install_dependencies(dependencies):
+    print("Checking for required dependencies...")
+    missing_deps = []
+    for pkg, cmd in dependencies:
+        if not is_command_available(cmd):
+            missing_deps.append(pkg)
+        else:
+            print(f"  [✓] {pkg} is already installed.")
+
+    if not missing_deps:
+        print("\nAll dependencies are satisfied.")
+        return
+
+    print("\nThe following dependencies are missing:", ", ".join(missing_deps))
+    proceed = input("Do you want to install them? (y/n): ")
     if proceed.lower() == 'y':
-        execute_command(f"sudo apt install {dependency} -y", f"Installing {dependency}")
-        if is_installed(dependency):
-            print(f"{dependency} successfully installed.")
-        else:
-            print(f"Failed to install {dependency}.")
+        # Update package list first
+        execute_command("sudo apt-get update", "Updating package list")
+        
+        for pkg in missing_deps:
+            execute_command(f"sudo apt-get install -y {pkg}", f"Installing {pkg}")
     else:
-        print(f"Skipping {dependency} installation.")
-
-# Thorough installation check
-def check_installation(dependencies):
-    print("\nChecking installation status of dependencies...")
-    for dep, message in dependencies:
-        if is_installed(dep):
-            print(f"{dep} is installed.")
-        else:
-            print(f"{dep} is not installed.")
-
-# Self-destruct: Uninstall everything in reverse order of installation
-def self_destruct(dependencies):
-    print("\nSelf-destruct sequence initiated...")
-    for dep in reversed(dependencies):
-        execute_command(f"sudo apt remove --purge -y {dep[0]}", f"Uninstalling {dep[0]}")
-    print("All dependencies have been removed. Cleaning up...")
-
-# Get user choice for installation type
-def get_user_choice():
-    print("\nChoose the installation type:")
-    print("1. Fresh Install (removes all existing libraries)")
-    print("2. Partial Reinstall (removes only specific libraries)")
-    print("3. Full Reinstall (removes and reinstalls all libraries with user prompts)")
-    print("4. Check Installation Status")
-    print("5. Self-Destruct (Uninstall everything in reverse order)")
-    choice = input("Enter your choice (1, 2, 3, 4, or 5): ")
-    return choice
+        print("Skipping installation of missing dependencies. The tool may not work correctly.")
 
 # Main function
 def main():
+    # Dependencies format: (package_name, command_to_check)
     dependencies = [
-        ("python3-tk", "Installing tkinter..."),
-        ("git", "Installing git..."),
-        ("python3", "Installing Python..."),
-        ("wget", "Installing wget..."),
-        ("php", "Installing PHP..."),
-        ("openssh-client", "Installing OpenSSH Client..."),
-        ("jq", "Installing jq...")
+        ("python3-tk", "wish"),  # tk is checked via the 'wish' command
+        ("git", "git"),
+        ("python3", "python3"),
+        ("wget", "wget"),
+        ("php", "php"),
+        ("openssh-client", "ssh"),
+        ("jq", "jq")
     ]
 
-    # Get user choice for installation type
-    choice = get_user_choice()
-
-    if choice == '1':
-        uninstall_dependencies([dep[0] for dep in dependencies])
-        for dep, message in dependencies:
-            install_dependency_with_prompt(dep, message)
-    elif choice == '2':
-        partial_dependencies = [
-            "python3",  # Only specify libraries you want to remove
-            "git"
-        ]
-        uninstall_dependencies(partial_dependencies)
-        for dep, message in dependencies:
-            install_dependency_with_prompt(dep, message)
-    elif choice == '3':
-        uninstall_dependencies([dep[0] for dep in dependencies])
-        for dep, message in dependencies:
-            install_dependency_with_prompt(dep, message)  # Install each dependency with prompt
-    elif choice == '4':
-        check_installation(dependencies)
-    elif choice == '5':
-        confirmation = input("Are you sure you want to self-destruct and remove all installed dependencies? (y/n): ")
-        if confirmation.lower() == 'y':
-            self_destruct(dependencies)
-        else:
-            print("Self-destruct canceled.")
-    else:
-        print("Invalid choice. Exiting.")
-        return
+    check_and_install_dependencies(dependencies)
 
     # Ask user for the installation directory
-    import tkinter as tk
-    from tkinter import filedialog
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+        root = tk.Tk()
+        root.withdraw()  # Hide the root window
+        install_dir = filedialog.askdirectory(title="Select Installation Directory for Cypher")
+    except (ImportError, RuntimeError) as e:
+        print("\nCould not open a graphical file dialog.")
+        print("This might be because you are in a non-GUI environment or 'python3-tk' is not properly installed.")
+        install_dir = input("Please enter the full path for the installation directory: ")
 
-    root = tk.Tk()
-    root.withdraw()  # Hide the root window
-    install_dir = filedialog.askdirectory(title="Select Installation Directory")
 
     if not install_dir:
-        print("Installation canceled.")
+        print("No installation directory selected. Aborting.")
         return
 
-    os.chdir(install_dir)
-
-    # Commands to execute
-    commands = [
-        ("sudo ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1", "Generating SSH key"),
-        ("git clone https://github.com/AsHfIEXE/Cypher", "Cloning Cypher repository"),
-        ("cd Cypher && python3 cypher.py", "Running cypher.py")
-    ]
-
-    # Execute each command
-    for command, description in commands:
+    # Ensure the directory exists, if not, create it.
+    if not os.path.isdir(install_dir):
+        print(f"Directory '{install_dir}' does not exist. Creating it now.")
         try:
-            execute_command(command, description)
-        except subprocess.CalledProcessError as e:
-            print(f"\nError occurred: {e}")
-            break
+            os.makedirs(install_dir)
+        except OSError as e:
+            print(f"Error: Could not create directory {install_dir}. {e}")
+            return
+            
+    os.chdir(install_dir)
+    print(f"\nChanged working directory to {install_dir}")
+
+    # Commands to execute for setup
+    # Check if repo already cloned
+    if not os.path.isdir(os.path.join(install_dir, "Cypher")):
+        execute_command("git clone https://github.com/AsHfIEXE/Cypher", "Cloning Cypher repository")
+    else:
+        print("\nCypher repository already exists. Skipping clone.")
+
+    # Generate SSH key if it doesn't exist
+    if not os.path.exists(os.path.expanduser("~/.ssh/id_rsa")):
+        execute_command("ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa", "Generating SSH key")
+    else:
+        print("SSH key already exists. Skipping generation.")
+
+    # Change to repo directory and run
+    cypher_dir = os.path.join(install_dir, "Cypher")
+    if os.path.isdir(cypher_dir):
+        os.chdir(cypher_dir)
+        print("\nLaunching Cypher...")
+        execute_command("python3 cypher.py", "Running cypher.py")
+    else:
+        print("Error: Cypher directory not found after cloning.")
 
 if __name__ == "__main__":
     main()
