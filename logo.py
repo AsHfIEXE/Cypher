@@ -35,8 +35,8 @@ def banner():
                                                                  {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
                                                                    {YELLOW}BY: {RED}AsHfIEXE {RED}<Cypher>{DEFAULT}     
                                                                  {lblue}•·.·''·.·•·.·''·.·•{DEFAULT}
-                         {GREEN2}GitHub Profile{y}{RED} : {DEFAULT}{YELLOW}{https://github.com/AsHfIEXE{DEFAULT} 
-                      {GREEN2}LinkedIn Profile{y}{RED} : {DEFAULT}{YELLOW}{https://www.linkedin.com/in/salehinashfi{DEFAULT}
+                         {GREEN2}GitHub Profile{y}{RED} : {DEFAULT}{YELLOW}{{https://github.com/AsHfIEXE{DEFAULT} 
+                      {GREEN2}LinkedIn Profile{y}{RED} : {DEFAULT}{YELLOW}{{https://www.linkedin.com/in/salehinashfi{DEFAULT}
            
            
     '''.format(RED=RED, BRED=BRED, CYAN=CYAN, GREEN=GREEN, DEFAULT=DEFAULT ,YELLOW=YELLOW, Magenta=Magenta,y=y, lred=lred, lyellow=lyellow, BLINK=BLINK, GREEN2=GREEN2, YELLOW2=YELLOW2, lblue=lblue))
