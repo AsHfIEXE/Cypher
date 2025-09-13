@@ -199,6 +199,12 @@ def randomLocalxpose(port):
     print("\n\n{5}-------------------------------\n{0} [ {2}RANDOM LOCALXPOSE URL !!{0}] \n{5}-------------------------------{4}".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     print("\n\t {0}wait for few second.....".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
     
+    # Check if localxpose is available
+    if not checkLocalxpose():
+        print(f"{RED}[!] Localxpose is not available. Please select a different option.{DEFAULT}")
+        sleep(2)
+        return selectServer(port)
+    
     start_php_server(port)
 
     loclx_executable = path.join(SCRIPT_DIR, 'Server', 'loclx.exe' if is_windows else 'loclx')

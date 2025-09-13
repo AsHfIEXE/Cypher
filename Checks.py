@@ -185,63 +185,107 @@ def checkNgrok():
         return True
 
 def checkLocalxpose():
-    loclx_path = os.path.join('Server', 'loclx.exe' if systemos() == "Windows" else 'loclx')
+    """Check for and download localxpose if needed. Returns True if available, False if not."""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    server_dir = os.path.join(script_dir, 'Server')
+    if not os.path.exists(server_dir):
+        try:
+            os.makedirs(server_dir)
+        except Exception as e:
+            print(f"{RED}[!] Error creating Server directory: {e}")
+            return False
+    
+    loclx_path = os.path.join(server_dir, 'loclx.exe' if systemos() == "Windows" else 'loclx')
+    
     if not path.isfile(loclx_path):
         print(' {0}[{2}*{0}]{2} Localxpose Not Found {0}!!'.format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
         print(' {0}[{2}*{0}]{2} Downloading Localxpose...{5}'.format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
         
         ostype = systemos().lower()
-        machine = platform.machine()
+        machine = platform.machine().lower()
+        arch = architecture()[0]
 
         filename = None
         if 'linux' in ostype:
-            if 'arm' in machine:
-                filename = 'loclx-linux-arm.zip'
-            elif 'amd64' in machine:
+            if 'arm' in machine or 'aarch' in machine:
+                filename = 'loclx-linux-arm64.zip'
+            elif '64' in arch:
                 filename = 'loclx-linux-amd64.zip'
+            else:
+                filename = 'loclx-linux-386.zip'
+        elif 'darwin' in ostype:  # macOS
+            if 'arm64' in machine:
+                filename = 'loclx-darwin-arm64.zip'
+            else:
+                filename = 'loclx-darwin-amd64.zip'
         elif 'windows' in ostype:
-             filename = 'loclx-windows-amd64.zip'
+            if '64' in arch:
+                filename = 'loclx-windows-amd64.zip'
+            else:
+                filename = 'loclx-windows-386.zip'
         
         if not filename:
             print(f"{RED}[!] Localxpose not available for your OS/Architecture: {ostype}/{machine}")
-            return
+            return False
 
-        url = 'https://api.localxpose.io/api/v2/downloads/'+filename
+        url = 'https://lxcdn.b-cdn.net/' + filename
         try:
             print(f'{GREEN}[*] Downloading {filename}...{DEFAULT}')
             response = requests.get(url, stream=True)
             response.raise_for_status()
 
-            with open(filename, "wb") as file_obj:
+            download_path = os.path.join(server_dir, filename)
+            with open(download_path, "wb") as file_obj:
                 for chunk in response.iter_content(chunk_size=8192):
                     file_obj.write(chunk)
 
-            with zipfile.ZipFile(filename, 'r') as zip_ref:
-                zip_ref.extractall('.')
+            with zipfile.ZipFile(download_path, 'r') as zip_ref:
+                zip_ref.extractall(server_dir)
             
             extracted_exe = 'loclx.exe' if 'windows' in ostype else 'loclx'
-            if not os.path.exists(extracted_exe):
-                for item in os.listdir('.'):
-                    if 'loclx' in item and not item.endswith('.zip'):
-                        extracted_exe = item
-                        break
+            extracted_path = os.path.join(server_dir, extracted_exe)
+            
+            if not os.path.exists(extracted_path):
+                loclx_found = False
+                for item in os.listdir(server_dir): 
+                    if 'loclx' in item.lower() and not item.endswith('.zip'):
+                        try:
+                            shutil.move(os.path.join(server_dir, item), loclx_path)
+                            loclx_found = True
+                            break
+                        except Exception as e:
+                            print(f"{RED}[!] Error moving localxpose executable: {e}")
+                            return False
+                
+                if not loclx_found:
+                    print(f"{RED}[!] Could not find localxpose executable in the extracted files")
+                    return False
 
-            shutil.move(extracted_exe, loclx_path)
-            os.remove(filename)
+            try:
+                os.remove(download_path)
+            except Exception as e:
+                print(f"{YELLOW}[!] Warning: Could not remove download file: {e}")
 
             if not 'windows' in ostype:
-                os.chmod(loclx_path, 0o755)
+                try:
+                    os.chmod(loclx_path, 0o755)
+                except Exception as e:
+                    print(f"{RED}[!] Error setting executable permissions: {e}")
+                    return False
 
-            system('clear')
-            print("\n\n\n\t\t{2}[{0}#{2}] {0}Localxpose downloaded successfully! Please restart the program.".format(RED, WHITE, CYAN, GREEN, DEFAULT , YELLOW))
-            exit()
+            print(" {0}[{2}*{0}] {2}Localxpose downloaded successfully!".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
+            sleep(1)
+            return True
+            
         except Exception as e:
             print(f"{RED}[!] Error downloading or setting up Localxpose: {e}")
-            print(f"{YELLOW}[!] Please try downloading it manually from https://localxpose.io/download and place it in the 'Server' directory.")
-            exit()
+            print(f"{YELLOW}[!] Please try downloading it manually from https://localxpose.io/download")
+            print(f"{YELLOW}[!] and place it as 'loclx' in the Server directory.")
+            return False
     else:
         print(" {0}[{2}*{0}] {2}LOCALXPOSE INSTALLATION FOUND.....".format(RED, WHITE, CYAN, GREEN, DEFAULT ,YELLOW))
         sleep(1)
+        return True
 
 def loop():
     """This function previously contained obfuscated, potentially malicious code. It has been disabled."""
